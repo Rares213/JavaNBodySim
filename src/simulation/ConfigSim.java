@@ -43,7 +43,7 @@ public class ConfigSim
     public final Float SLIDER_STEPSIZE_MAX = 1.0F;
 
     public final String DROPDOWN_BODIES_NAME = "Bodies settings";
-    public final Integer INIT_NUMBER_BODIES = 100;
+    public final Integer INIT_NUMBER_BODIES = 50;
     public final String SLIDER_NUMBER_BODIES_NAME = "Number bodies";
     public final Integer SLIDER_NUMBER_BODIES_MAX = 10000;
 
@@ -60,4 +60,11 @@ public class ConfigSim
     public final String DROPDOWN_FORCEFINDER_NAME = "ForceFinder options";
     public final String DIRECT_METHOD_BUTTON_NAME = "Direct Method";
     public final String DIRECT_METHOD_BUTTON_ACTION_COMMAND = "directMethod";
+
+    public final Float INIT_THETA = 1.0F;
+    public final Float SLIDER_THETA_STEPSIZE = 0.01F;
+    public final Float SLIDER_THETA_MAX = 10.0F;
+    public final String SLIDER_THETA_NAME = "Theta";
+    public final String BARNES_HUT_METHOD_BUTTON_NAME = "Barnes Hut";
+    public final String BARNES_HUT_METHOD_BUTTON_ACTION_COMMAND = "barnesHut";
 }

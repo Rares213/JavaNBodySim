@@ -16,6 +16,7 @@ public class SimulationState
         G = conf.INIT_G;
         soft = conf.INIT_SOFT;
         stepSize = conf.INIT_STEPSIZE;
+        theta = conf.INIT_THETA;
         numberBodies = conf.INIT_NUMBER_BODIES;
     }
 
@@ -79,6 +80,16 @@ public class SimulationState
         this.stepSize = stepSize;
     }
 
+    public float getTheta()
+    {
+        return theta;
+    }
+
+    public void setTheta(float theta)
+    {
+        this.theta = theta;
+    }
+
     public int getNumberBodies()
     {
         return numberBodies;
@@ -95,5 +106,6 @@ public class SimulationState
     private float G;
     private float soft;
     private float stepSize;
+    private float theta;
     private int numberBodies;
 }

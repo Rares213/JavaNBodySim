@@ -2,5 +2,6 @@ package physics;
 
 public enum ForceFinderType
 {
-    GRAVITY_DIRECT
+    GRAVITY_DIRECT,
+    BARNES_HUT
 }

@@ -13,6 +13,8 @@ public class GravityDirect extends Gravity
     @Override
     public void findGravity()
     {
+        long startTime = System.currentTimeMillis();
+
         final ArrayList<Float> x = gravityData.position.get(0);
         final ArrayList<Float> y = gravityData.position.get(1);
         ArrayList<Float> mass = gravityData.mass;
@@ -45,5 +47,8 @@ public class GravityDirect extends Gravity
             gravityData.force.get(0).set(i, acummFx);
             gravityData.force.get(1).set(i, accumFy);
         }
+
+        long endTime = System.currentTimeMillis();
+        duration = endTime - startTime;
     }
 }

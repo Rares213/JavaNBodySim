@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public abstract class Gravity implements ForceFinder
 {
+    GravityData gravityData;
+    long duration = 0;
+
     static public class GravityData
     {
         public GravityData(float G, float soft,
@@ -17,8 +20,6 @@ public abstract class Gravity implements ForceFinder
             this.mass = mass;
             this.position = position;
             this.force = force;
-
-            this.duration = 0.0f;
         }
 
         float G;
@@ -42,14 +43,12 @@ public abstract class Gravity implements ForceFinder
     }
     public abstract void findGravity();
 
-    public float getDuration()
+    public long getDuration()
     {
-        return gravityData.duration;
+        return duration;
     }
     public void setPosition(ArrayList<ArrayList<Float>> position)
     {
         gravityData.position = position;
     }
-
-    GravityData gravityData;
 }

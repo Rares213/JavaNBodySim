@@ -20,11 +20,13 @@ public class SimulationMenu extends JPanel
 
     DropdownMenu forceFinderOptions;
     JRadioButton directButton;
+    JRadioButton barnesHutButton;
 
     DropdownMenu physicsSettings;
     LabeledSliderFloat gravitySlider;
     LabeledSliderFloat softSlider;
     LabeledSliderFloat stepSizeSlider;
+    LabeledSliderFloat thetaSlider;
 
     //bodies related ui
     DropdownMenu bodiesSettings;
@@ -73,6 +75,7 @@ public class SimulationMenu extends JPanel
         eulerExplicitButton.addActionListener(actionListener);
         eulerImplicitButton.addActionListener(actionListener);
         directButton.addActionListener(actionListener);
+        barnesHutButton.addActionListener(actionListener);
         resetBodies.addActionListener(actionListener);
     }
 
@@ -145,10 +148,16 @@ public class SimulationMenu extends JPanel
         directButton.setActionCommand(conf.DIRECT_METHOD_BUTTON_ACTION_COMMAND);
         directButton.setSelected(true);
 
+        barnesHutButton = new JRadioButton(conf.BARNES_HUT_METHOD_BUTTON_NAME);
+        barnesHutButton.setName(conf.BARNES_HUT_METHOD_BUTTON_NAME);
+        barnesHutButton.setActionCommand(conf.BARNES_HUT_METHOD_BUTTON_ACTION_COMMAND);
+
         ButtonGroup forcefinderGroup = new ButtonGroup();
         forcefinderGroup.add(directButton);
+        forcefinderGroup.add(barnesHutButton);
 
         forceFinderOptions.addDropComponents(directButton);
+        forceFinderOptions.addDropComponents(barnesHutButton);
 
         add(forceFinderOptions);
     }
@@ -160,11 +169,13 @@ public class SimulationMenu extends JPanel
         gravitySlider = new LabeledSliderFloat(conf.SLIDER_GRAVITY_NAME, conf.SLIDER_G_MAX, conf.SLIDER_G_STEPSIZE, conf.INIT_G);
         softSlider = new LabeledSliderFloat(conf.SLIDER_SOFT_NAME, conf.SLIDER_SOFT_MAX, conf.SLIDER_SOFT_STEPSIZE, conf.INIT_SOFT);
         stepSizeSlider = new LabeledSliderFloat(conf.SLIDER_STEPSIZE_NAME, conf.SLIDER_STEPSIZE_MAX, conf.SLIDER_STEPSIZE_STEPSIZE, conf.INIT_STEPSIZE);
+        thetaSlider = new LabeledSliderFloat(conf.SLIDER_THETA_NAME, conf.SLIDER_THETA_MAX, conf.SLIDER_THETA_STEPSIZE, conf.INIT_THETA);
 
         physicsSettings = new DropdownMenu(conf.DROPDOWN_PHYSICS_NAME);
         physicsSettings.addDropComponents(gravitySlider);
         physicsSettings.addDropComponents(softSlider);
         physicsSettings.addDropComponents(stepSizeSlider);
+        physicsSettings.addDropComponents(thetaSlider);
         physicsSettings.setBorder(new EmptyBorder(0, 5, 0, 20));
 
         add(physicsSettings);

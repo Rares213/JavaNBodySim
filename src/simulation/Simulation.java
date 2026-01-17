@@ -90,6 +90,11 @@ public class Simulation
                     simulationState.setStepSize(sliderFloat.getFloatValue());
                     physics.setIntegrator(makeIntegrator());
                 }
+                else if(sliderFloat.getName().equals(conf.SLIDER_THETA_NAME))
+                {
+                    simulationState.setTheta(sliderFloat.getFloatValue());
+                    physics.setForceFinder(makeForceFinder());
+                }
 
                 System.out.println("Name: " + sliderFloat.getName() + " value: " +  sliderFloat.getFloatValue());
             }
@@ -135,6 +140,11 @@ public class Simulation
                     physics.setForceFinder(makeForceFinder());
                     physics.setIntegrator(makeIntegrator());
                 }
+                else if(aButton.getActionCommand().equals(conf.BARNES_HUT_METHOD_BUTTON_ACTION_COMMAND))
+                {
+                    simulationState.setFfType(ForceFinderType.BARNES_HUT);
+                    physics.setForceFinder(makeForceFinder());
+                }
 
 
                 System.out.println("Button name: " + aButton.getName() + " Action: " + aButton.getActionCommand());
@@ -177,7 +187,19 @@ public class Simulation
                         bodies.getBodiesProperty(Bodies.Property.FORCE));
 
                 return new GravityDirect(gravityData);
+            }
+            case ForceFinderType.BARNES_HUT:
+            {
+                Gravity.GravityData gravityData = new Gravity.GravityData(
+                        simulationState.getG(),
+                        simulationState.getSoft(),
+                        bodies.getBodiesProperty(Bodies.Property.MASS).getFirst(),
+                        bodies.getBodiesProperty(Bodies.Property.POSITION),
+                        bodies.getBodiesProperty(Bodies.Property.FORCE));
 
+                BarnesHutGravity.BarnesHutData bhData = new BarnesHutGravity.BarnesHutData(gravityData, simulationState.getTheta());
+
+                return new BarnesHutGravity(bhData);
             }
         }
 
