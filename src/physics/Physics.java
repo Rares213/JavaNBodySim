@@ -26,5 +26,14 @@ public class Physics
         this.integrator = integrator;
     }
 
+    public long getForcefinderDuration()
+    {
+        return forceFinder.getDuration();
+    }
+
+    public long getIntegratorDuration()
+    {
+        return integrator.getDuration();
+    }
 
 }

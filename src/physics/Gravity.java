@@ -24,7 +24,6 @@ public abstract class Gravity implements ForceFinder
 
         float G;
         float soft;
-        float duration;
 
         ArrayList<Float> mass;
         ArrayList<ArrayList<Float>> position;
@@ -43,10 +42,12 @@ public abstract class Gravity implements ForceFinder
     }
     public abstract void findGravity();
 
+    @Override
     public long getDuration()
     {
         return duration;
     }
+
     public void setPosition(ArrayList<ArrayList<Float>> position)
     {
         gravityData.position = position;

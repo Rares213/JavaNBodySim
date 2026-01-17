@@ -30,6 +30,7 @@ public class SimulationMenu extends JPanel
 
     //bodies related ui
     DropdownMenu bodiesSettings;
+    LabeledSliderFloat radiusSlider;
     LabeledSliderInt numberBodiesSlider;
     JButton resetBodies;
 
@@ -61,11 +62,18 @@ public class SimulationMenu extends JPanel
         //integratorOptions.addPropertyChangeListener();
     }
 
+
+    public void addRadiusSliderListener(ChangeListener changeListener)
+    {
+        radiusSlider.listenSliderChanges(changeListener);
+    }
+
     public void addChangeListener(ChangeListener changeListener)
     {
         gravitySlider.listenSliderChanges(changeListener);
         softSlider.listenSliderChanges(changeListener);
         stepSizeSlider.listenSliderChanges(changeListener);
+        thetaSlider.listenSliderChanges(changeListener);
 
         numberBodiesSlider.listenSliderChanges(changeListener);
     }
@@ -79,11 +87,17 @@ public class SimulationMenu extends JPanel
         resetBodies.addActionListener(actionListener);
     }
 
+    public void setSimStatistics(long forcefinderDelta, long integratorDelta)
+    {
+        this.forceFinderDelta.setText("Forcefinder delta: " + forcefinderDelta + " ms");
+        this.integratorDelta.setText("Integrator delta: " + integratorDelta + " ms");
+    }
+
     private void initSimStatistics()
     {
-        forceFinderDelta = new JLabel("Forcefinder delta: 0.000 ms");
+        forceFinderDelta = new JLabel("Forcefinder delta: 0 ms");
         forceFinderDelta.setBorder(new EmptyBorder(10, 5, 0, 0));
-        integratorDelta = new JLabel("Integrator delta: 0.000 ms");
+        integratorDelta = new JLabel("Integrator delta: 0 ms");
         integratorDelta.setBorder(new EmptyBorder(5, 5, 5, 0));
 
         add(forceFinderDelta);
@@ -94,6 +108,7 @@ public class SimulationMenu extends JPanel
     {
         ConfigSim conf = ConfigSim.getInstance();
 
+        radiusSlider = new LabeledSliderFloat(conf.SLIDER_RADIUS_NAME, conf.SLIDER_RADIUS_MAX, conf.SLIDER_RADIUS_STEPSIZE, conf.INIT_RADIUS);
         numberBodiesSlider = new LabeledSliderInt(conf.SLIDER_NUMBER_BODIES_NAME, conf.SLIDER_NUMBER_BODIES_MAX, conf.INIT_NUMBER_BODIES);
 
         resetBodies = new JButton(conf.RESET_BODIES_BUTTON_NAME);
@@ -101,6 +116,7 @@ public class SimulationMenu extends JPanel
         resetBodies.setActionCommand(conf.RESET_BODIES_BUTTON_ACTION_COMMAND);
 
         bodiesSettings = new DropdownMenu(conf.DROPDOWN_BODIES_NAME);
+        bodiesSettings.addDropComponents(radiusSlider);
         bodiesSettings.addDropComponents(numberBodiesSlider);
         bodiesSettings.addDropComponents(Box.createRigidArea(new Dimension(0, 5)));
         bodiesSettings.addDropComponents(resetBodies);

@@ -14,6 +14,8 @@ public class EulerImplicit extends Integrator
     {
         forcefinder.findForce();
 
+        long startTime = System.currentTimeMillis();
+
         ArrayList<Float> fx = integratorData.force.get(0);
         ArrayList<Float> fy = integratorData.force.get(1);
 
@@ -45,5 +47,8 @@ public class EulerImplicit extends Integrator
             final float newY = y.get(i) + stepSize * newVy;
             y.set(i, newY);
         }
+
+        long endTime = System.currentTimeMillis();
+        duration = endTime - startTime;
     }
 }

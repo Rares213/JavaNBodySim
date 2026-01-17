@@ -12,11 +12,12 @@ public class NBodySimMain
 
         SimulationState simState = new SimulationState();
         SimulationPanel simPanel = new SimulationPanel();
-        Simulation sim = new Simulation(simState, simPanel);
         SimulationMenu simMenu = new SimulationMenu();
+        Simulation sim = new Simulation(simState, simPanel, simMenu);
 
         simMenu.addChangeListener(sim);
         simMenu.addActionListener(sim);
+        simMenu.addRadiusSliderListener(simPanel);
 
         core.addLayer(sim);
         core.addLayer(simPanel);

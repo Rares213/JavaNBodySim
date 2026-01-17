@@ -22,13 +22,15 @@ public class Simulation
     private Physics physics;
     private SimulationState simulationState;
     private SimulationPanel simulationPanel;
+    private SimulationMenu simulationMenu;
 
     ConcurrentLinkedQueue<EventObject> eventQueue;
 
-    public Simulation(SimulationState simState, SimulationPanel simulationPanel)
+    public Simulation(SimulationState simState, SimulationPanel simulationPanel, SimulationMenu simulationMenu)
     {
         this.simulationState = simState;
         this.simulationPanel = simulationPanel;
+        this.simulationMenu = simulationMenu;
 
         BodiesInit bodiesInit = new BodiesInit(simState.getNumberBodies(), simState.getIcType());
         bodies = new Bodies(bodiesInit);
@@ -39,11 +41,6 @@ public class Simulation
         eventQueue = new ConcurrentLinkedQueue<>();
     }
 
-    public void onEvent(Event event)
-    {
-
-    }
-
     public void onUpdate()
     {
         if(!eventQueue.isEmpty())
@@ -51,6 +48,8 @@ public class Simulation
 
         bodies.resetForce();
         physics.runPhysics();
+
+        simulationMenu.setSimStatistics(physics.getForcefinderDuration(), physics.getIntegratorDuration());
     }
 
     public void onRender()

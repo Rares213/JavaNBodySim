@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public abstract class Integrator
 {
+    IntegratorData integratorData;
+    long duration = 0;
+
     public static class IntegratorData
     {
         public IntegratorData(float stepSize,
@@ -21,7 +24,6 @@ public abstract class Integrator
             this.mass = mass;
         }
 
-
         float stepSize;
 
         ArrayList<ArrayList<Float>> position;
@@ -36,7 +38,7 @@ public abstract class Integrator
         this.integratorData = integratorData;
     }
 
-    public abstract void integrate(ForceFinder forcefinder);
+    public long getDuration() { return duration; }
 
-    IntegratorData integratorData;
+    public abstract void integrate(ForceFinder forcefinder);
 }

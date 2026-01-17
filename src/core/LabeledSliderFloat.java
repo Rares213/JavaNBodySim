@@ -62,11 +62,6 @@ public class LabeledSliderFloat extends JPanel
     public void stateChanged(ChangeEvent e)
     {
         label.setText(getFormatedLabelString(name, numDecimals, slider.getFloatValue()));
-
-        /*
-        SliderFloat slider = (SliderFloat) e.getSource();
-        System.out.println(slider.getName());
-        */
     }
 
 }

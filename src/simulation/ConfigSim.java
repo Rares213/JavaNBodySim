@@ -67,4 +67,10 @@ public class ConfigSim
     public final String SLIDER_THETA_NAME = "Theta";
     public final String BARNES_HUT_METHOD_BUTTON_NAME = "Barnes Hut";
     public final String BARNES_HUT_METHOD_BUTTON_ACTION_COMMAND = "barnesHut";
+
+    public final Float INIT_RADIUS = 1.0F;
+    public final Float SLIDER_RADIUS_STEPSIZE = 0.01F;
+    public final Float SLIDER_RADIUS_MAX = 10.0F;
+    public final String SLIDER_RADIUS_NAME = "Radius";
+
 }
