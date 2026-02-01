@@ -50,6 +50,8 @@ public class SimulationPanel extends JPanel
     @Override
     protected void paintComponent(Graphics g)
     {
+        long startTime = System.currentTimeMillis();
+
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
@@ -66,7 +68,6 @@ public class SimulationPanel extends JPanel
             g2d.fill(ellipseBody);
             g2d.draw(ellipseBody);
         }
-
     }
 
     @Override

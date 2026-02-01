@@ -11,9 +11,7 @@ public class ConfigSim
     static public ConfigSim getInstance()
     {
         if(instance == null)
-        {
             instance = new ConfigSim();
-        }
 
         return instance;
     }
@@ -45,7 +43,7 @@ public class ConfigSim
     public final String DROPDOWN_BODIES_NAME = "Bodies settings";
     public final Integer INIT_NUMBER_BODIES = 50;
     public final String SLIDER_NUMBER_BODIES_NAME = "Number bodies";
-    public final Integer SLIDER_NUMBER_BODIES_MAX = 10000;
+    public final Integer SLIDER_NUMBER_BODIES_MAX = 100000;
 
     public final String RESET_BODIES_BUTTON_NAME = "Reset Bodies";
     public final String RESET_BODIES_BUTTON_ACTION_COMMAND = "reset";

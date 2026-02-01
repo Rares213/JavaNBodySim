@@ -1,21 +1,44 @@
 package physics;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class BarnesHutGravity extends Gravity
 {
     protected BarnesHutData bhData;
     protected QuadTree quadTree;
+    protected ExecutorService pool;
+    ArrayList<WorkerData> workersData;
 
     public BarnesHutGravity(BarnesHutData bhData)
     {
         super(bhData.gravityData);
         this.bhData = bhData;
+
         quadTree = new QuadTree(bhData);
+
+        pool = Executors.newFixedThreadPool(NUM_WORKERS);
+        workersData = new ArrayList<WorkerData>(NUM_WORKERS);
+
+        final int bodiesWorker = bhData.gravityData.mass.size() / NUM_WORKERS;
+
+        for(int i = 0; i < NUM_WORKERS; ++i)
+            workersData.add(new WorkerData(i * bodiesWorker, (i + 1) * bodiesWorker, quadTree));
+
+        final int remainingBodies = bhData.gravityData.mass.size() % NUM_WORKERS;
+        if(remainingBodies > 0)
+        {
+            final int lastElement = NUM_WORKERS - 1;
+            WorkerData lastWorkerData =  workersData.get(lastElement);
+            lastWorkerData.endIndex += remainingBodies;
+        }
+
     }
 
     @Override
@@ -27,13 +50,29 @@ public class BarnesHutGravity extends Gravity
 
         quadTree.initQuadTree();
 
-        for(int i = 0; i < count; ++i)
+        for (int i = 0; i < count; ++i)
             quadTree.insert(i, 0);
 
         quadTree.findCenterOfMass(0);
 
-        for(int i = 0; i < count; ++i)
-            quadTree.findForce(i, 0);
+        for(int i = 0; i < NUM_WORKERS; ++i)
+        {
+            WorkerData workerData = workersData.get(i);
+            workerData.future = pool.submit(workerData);
+        }
+
+        for(int i = 0; i < NUM_WORKERS; ++i)
+        {
+            WorkerData workerData = workersData.get(i);
+            try
+            {
+                workerData.future.get();
+            }
+            catch(InterruptedException | ExecutionException err)
+            {
+                System.out.println("Error in future: " + err.getMessage());
+            }
+        }
 
         quadTree.clear();
 
@@ -52,6 +91,32 @@ public class BarnesHutGravity extends Gravity
             this.theta = theta;
         }
     }
+
+    static protected class WorkerData
+            implements Runnable
+    {
+        int startIndex = 0, endIndex = 0;
+        QuadTree quadTree = null;
+        Future<?> future;
+
+        WorkerData() {}
+
+        WorkerData(int startIndex, int endIndex, QuadTree quadTree)
+        {
+            this.startIndex = startIndex;
+            this.endIndex = endIndex;
+            this.quadTree = quadTree;
+        }
+
+        @Override
+        public void run()
+        {
+            for(int i = startIndex; i < endIndex; ++i)
+                quadTree.findForce(i, 0);
+        }
+    }
+
+    protected static final int NUM_WORKERS = 4;
 
     protected static final int EMPTY = -1;
     protected static final int INTERNAL_NODE = -2;

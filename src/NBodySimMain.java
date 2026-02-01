@@ -30,5 +30,7 @@ public class NBodySimMain
         coreFrame.addComponentListener(simPanel);
 
         core.run();
+
+        coreFrame.dispose();
     }
 }

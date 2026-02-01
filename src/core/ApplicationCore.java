@@ -2,10 +2,17 @@ package core;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.awt.event.KeyListener;
 
-public class ApplicationCore
+public class ApplicationCore implements KeyListener
 {
+    JFrame frame;
+    JPanel mainPanel;
+    ArrayList<Layer> layers;
+    boolean shouldClose = false;
+
     public ApplicationCore(String name, int width, int height)
     {
         try
@@ -28,11 +35,12 @@ public class ApplicationCore
         }
 
         layers = new ArrayList<Layer>();
+        frame.addKeyListener(this);
     }
 
     public void run()
     {
-        while(true)
+        while(!shouldClose)
         {
             for(Layer layer : layers)
             {
@@ -87,7 +95,22 @@ public class ApplicationCore
         return frame;
     }
 
-    JFrame frame;
-    JPanel mainPanel;
-    ArrayList<Layer> layers;
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+            shouldClose = true;
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+
+    }
 }
