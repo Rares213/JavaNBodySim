@@ -48,7 +48,9 @@ public class LabeledSliderFloat extends JPanel
 
     private static int getNumberDecimals(final float stepSize)
     {
-        return Math.abs( (int)Math.log10(stepSize) );
+        double power = Math.abs(Math.log10(stepSize));
+        power = Math.ceil(power);
+        return (int)Math.abs( power );
     }
 
     private static String getFormatedLabelString(String str, final int numDecimals,  final float value)

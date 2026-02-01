@@ -60,9 +60,8 @@ public class SimulationPanel extends JPanel
 
         ArrayList<Float> x = position.get(0);
         ArrayList<Float> y = position.get(1);
-        int size = x.size();
 
-        for(int i = 0; i < size; i++)
+        for(int i = 0; i < x.size(); ++i)
         {
             Ellipse2D.Float ellipseBody = new Ellipse2D.Float(x.get(i), y.get(i), radius, radius);
             g2d.fill(ellipseBody);
@@ -73,10 +72,8 @@ public class SimulationPanel extends JPanel
     @Override
     public void componentResized(ComponentEvent e)
     {
-        System.out.println(e.toString());
         Component comp = e.getComponent();
         setSize(comp.getSize());
-
     }
 
     @Override

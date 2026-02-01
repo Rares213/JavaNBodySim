@@ -35,9 +35,7 @@ public class BodiesInit
 
     private void spiralInit()
     {
-        explicitMassInit(0, bodiesProperties.getSize(), 10.0f);
-
-
+        throw new UnsupportedOperationException("Spiral bodies not supported yet.");
     }
 
     private void explicitStaticInit(int indexStart, int indexEnd, float width)

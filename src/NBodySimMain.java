@@ -8,29 +8,40 @@ public class NBodySimMain
 {
     public static void main(String[] args)
     {
-        ApplicationCore core = new ApplicationCore("NBodySim", 1280, 720);
+        try
+        {
+            ApplicationCore core = new ApplicationCore("NBodySim", 1280, 720);
 
-        SimulationState simState = new SimulationState();
-        SimulationPanel simPanel = new SimulationPanel();
-        SimulationMenu simMenu = new SimulationMenu();
-        Simulation sim = new Simulation(simState, simPanel, simMenu);
+            SimulationState simState = new SimulationState();
+            SimulationPanel simPanel = new SimulationPanel();
+            SimulationMenu simMenu = new SimulationMenu();
 
-        simMenu.addChangeListener(sim);
-        simMenu.addActionListener(sim);
-        simMenu.addRadiusSliderListener(simPanel);
+            Simulation sim = new Simulation(simState, simPanel, simMenu);
 
-        core.addLayer(sim);
-        core.addLayer(simPanel);
+            simMenu.addChangeListener(sim);
+            simMenu.addActionListener(sim);
+            simMenu.addRadiusSliderListener(simPanel);
 
-        core.setMainPanel(simPanel);
-        core.addOverlayPanel(simMenu);
+            core.addLayer(sim);
+            core.addLayer(simPanel);
 
-        JFrame coreFrame = core.getFrame();
+            core.setMainPanel(simPanel);
+            core.addOverlayPanel(simMenu);
 
-        coreFrame.addComponentListener(simPanel);
+            JFrame coreFrame = core.getFrame();
 
-        core.run();
+            coreFrame.addComponentListener(simPanel);
 
-        coreFrame.dispose();
+            core.run();
+
+            coreFrame.dispose();
+        }
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+            System.exit(-1);
+        }
+
+
     }
 }

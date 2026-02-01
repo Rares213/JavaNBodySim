@@ -162,11 +162,11 @@ public class SimulationMenu extends JPanel
         directButton = new JRadioButton(conf.DIRECT_METHOD_BUTTON_NAME);
         directButton.setName(conf.DIRECT_METHOD_BUTTON_NAME);
         directButton.setActionCommand(conf.DIRECT_METHOD_BUTTON_ACTION_COMMAND);
-        directButton.setSelected(true);
 
         barnesHutButton = new JRadioButton(conf.BARNES_HUT_METHOD_BUTTON_NAME);
         barnesHutButton.setName(conf.BARNES_HUT_METHOD_BUTTON_NAME);
         barnesHutButton.setActionCommand(conf.BARNES_HUT_METHOD_BUTTON_ACTION_COMMAND);
+        barnesHutButton.setSelected(true);
 
         ButtonGroup forcefinderGroup = new ButtonGroup();
         forcefinderGroup.add(directButton);

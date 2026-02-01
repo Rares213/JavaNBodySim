@@ -20,7 +20,7 @@ public class ConfigSim
     {}
 
     public final InitialConditionsType INIT_BODIES_COND = InitialConditionsType.STATIC;
-    public final ForceFinderType INIT_FORCE_FINDER_OPTION = ForceFinderType.GRAVITY_DIRECT;
+    public final ForceFinderType INIT_FORCE_FINDER_OPTION = ForceFinderType.BARNES_HUT;
     public final IntegratorType INIT_INTEGRATOR_OPTION = IntegratorType.EULER_IMPLICIT;
 
     public final String DROPDOWN_PHYSICS_NAME = "Physics settings";
@@ -41,7 +41,7 @@ public class ConfigSim
     public final Float SLIDER_STEPSIZE_MAX = 1.0F;
 
     public final String DROPDOWN_BODIES_NAME = "Bodies settings";
-    public final Integer INIT_NUMBER_BODIES = 50;
+    public final Integer INIT_NUMBER_BODIES = 10000;
     public final String SLIDER_NUMBER_BODIES_NAME = "Number bodies";
     public final Integer SLIDER_NUMBER_BODIES_MAX = 100000;
 
