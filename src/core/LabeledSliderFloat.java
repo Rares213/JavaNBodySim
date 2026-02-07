@@ -49,7 +49,7 @@ public class LabeledSliderFloat extends JPanel
     private static int getNumberDecimals(final float stepSize)
     {
         double power = Math.abs(Math.log10(stepSize));
-        power = Math.ceil(power);
+        power = Math.round(power);
         return (int)Math.abs( power );
     }
 
