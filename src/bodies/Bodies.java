@@ -1,3 +1,7 @@
+/**
+ * Class that represents a bunch of bodies
+ */
+
 package bodies;
 
 import java.awt.*;
@@ -17,11 +21,20 @@ public class Bodies
         MASS
     }
 
+    /**
+     * Class constructor
+     * @param bodiesInit
+     */
     public Bodies(BodiesInit bodiesInit)
     {
         this.bodiesProperties = bodiesInit.getBodiesProperties();
     }
 
+    /**
+     * Get one of the bodies properties
+     * @param property
+     * @return
+     */
     public ArrayList<ArrayList<Float>> getBodiesProperty(Property property)
     {
         return switch (property)
@@ -35,11 +48,19 @@ public class Bodies
         };
     }
 
+    /**
+     * Get all the properties
+     * @return
+     */
     public BodiesProperties getBodiesProperties()
     {
         return bodiesProperties;
     }
 
+    /**
+     * Method for adding or removing bodies
+     * @param resizeBodiesInit
+     */
     public void resizeBodies(BodiesInit resizeBodiesInit)
     {
         BodiesProperties resizeBodiesProperties = resizeBodiesInit.getBodiesProperties();
@@ -86,11 +107,19 @@ public class Bodies
 
     }
 
+    /**
+     * Reinitialize the bodies
+     * @param bodiesInit
+     */
     public void resetBodies(BodiesInit bodiesInit)
     {
         bodiesProperties = bodiesInit.getBodiesProperties();
     }
 
+    /**
+     * Zeroes the forces for all bodies.
+     * Must be called after every iteration
+     */
     public void resetForce()
     {
         for(int i = 0; i < bodiesProperties.getSize(); i++)

@@ -1,20 +1,29 @@
+/**
+ * UI class that has a slider and label above
+ */
+
 package core;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class LabeledSliderInt extends JPanel
         implements ChangeListener
 {
-    JLabel label;
-    JSlider slider;
+    protected JLabel label;
+    protected JSlider slider;
 
-    String name;
+    protected String name;
 
+    /**
+     * Constructor for LabeledSliderInt
+     * @param name name of the label
+     * @param maxValue maximum value
+     * @param initialValue initial starting value
+     * @throws IllegalArgumentException if maximum value or initial value are negative
+     */
     public LabeledSliderInt(String name, int maxValue, int initialValue)
     {
         if (maxValue < 0 || initialValue < 0)
@@ -47,7 +56,6 @@ public class LabeledSliderInt extends JPanel
     {
         slider.addChangeListener(changeListener);
     }
-
 
     @Override
     public void stateChanged(ChangeEvent e)

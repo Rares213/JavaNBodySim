@@ -1,9 +1,17 @@
+/**
+ * Class that implements Implicit Euler, integrator that conserves the energy
+ */
+
 package physics;
 
 import java.util.ArrayList;
 
 public class EulerImplicit extends Integrator
 {
+    /**
+     * Constructor for Implicit Euler
+     * @param integratorData date needed for the class
+     */
     public EulerImplicit(IntegratorData integratorData)
     {
         super(integratorData);

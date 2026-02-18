@@ -1,3 +1,7 @@
+/**
+ * UI class that can be closed or opened by pressing a button
+ */
+
 package core;
 
 import javax.swing.*;
@@ -44,9 +48,9 @@ public class DropdownMenu extends JPanel
         //initialize the label name and the button
         //dropdown menu is hidden initially
         labelName = new JLabel(name);
-        dropButton = new DropdownButton(SwingConstants.SOUTH);
+        dropButton = new DropdownButton(SwingConstants.NORTH);
         dropButton.addActionListener(this);
-        buttonState = BUTTON_STATE.HIDE;
+        buttonState = BUTTON_STATE.SHOW;
 
         //initialize the panel that contains the label and the button
         panelLabelButton = new JPanel();
@@ -64,6 +68,10 @@ public class DropdownMenu extends JPanel
         add(panelLabelButton);
 
         panelDropComponents.add(Box.createRigidArea(new Dimension(0, 5)));
+
+        //opened by default
+        add(panelDropComponents);
+        updateUI();
     }
 
     public void addDropComponents(Component dropComponent)

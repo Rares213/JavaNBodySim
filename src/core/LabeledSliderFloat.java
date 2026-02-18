@@ -1,7 +1,10 @@
+/**
+ * UI class that has a float slider and label above
+ */
+
 package core;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -10,12 +13,20 @@ import java.lang.Math.*;
 public class LabeledSliderFloat extends JPanel
         implements ChangeListener
 {
-    private JLabel label;
-    private SliderFloat slider;
+    protected JLabel label;
+    protected SliderFloat slider;
 
-    private String name;
-    private int numDecimals;
+    protected String name;
+    protected int numDecimals;
 
+    /**
+     * Constructor for LabeledSliderFloat
+     * @param name name of the label
+     * @param maxValue maximum value of the slider
+     * @param stepSize how fast to increase/decrease
+     * @param initialValue starting value
+     * @throws IllegalArgumentException if maximum value, stepsize or initial value are negative or stepsize is not a power of 10 and grater than 0.1
+     */
     public LabeledSliderFloat(String name, float maxValue, float stepSize, float initialValue)
     {
         super();
@@ -36,24 +47,32 @@ public class LabeledSliderFloat extends JPanel
         add(slider);
     }
 
+    /**
+     * Get the float value of the slider
+     * @return
+     */
     public float getSliderValue()
     {
         return slider.getFloatValue();
     }
 
+    /**
+     * Listen for changes in slider
+     * @param changeListener
+     */
     public void listenSliderChanges(ChangeListener changeListener)
     {
         slider.addChangeListener(changeListener);
     }
 
-    private static int getNumberDecimals(final float stepSize)
+    private static int getNumberDecimals(float stepSize)
     {
         double power = Math.abs(Math.log10(stepSize));
         power = Math.round(power);
         return (int)Math.abs( power );
     }
 
-    private static String getFormatedLabelString(String str, final int numDecimals,  final float value)
+    private static String getFormatedLabelString(String str, int numDecimals, float value)
     {
         String formatStringFloat = "%." + numDecimals + "f";
 

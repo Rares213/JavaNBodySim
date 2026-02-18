@@ -1,3 +1,7 @@
+/**
+ * Class used to generate the initial conditions for the bodies
+ */
+
 package bodies;
 
 import java.util.Random;
@@ -6,6 +10,11 @@ public class BodiesInit
 {
     private BodiesProperties bodiesProperties;
 
+    /**
+     * Generate the initial conditions
+     * @param size number of bodies
+     * @param initCont the type of initial conditions
+     */
     public BodiesInit(int size, InitialConditionsType initCont)
     {
         this.bodiesProperties = new BodiesProperties(size);
@@ -22,6 +31,10 @@ public class BodiesInit
         }
     }
 
+    /**
+     * Get the properties
+     * @return
+     */
     public BodiesProperties getBodiesProperties()
     {
         return bodiesProperties;

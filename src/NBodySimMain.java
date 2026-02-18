@@ -12,36 +12,25 @@ public class NBodySimMain
         {
             ApplicationCore core = new ApplicationCore("NBodySim", 1280, 720);
 
-            SimulationState simState = new SimulationState();
-            SimulationPanel simPanel = new SimulationPanel();
-            SimulationMenu simMenu = new SimulationMenu();
+            SimViewParticles simViewParticles = new SimViewParticles();
+            SimViewMenu simViewMenu = new SimViewMenu();
+            SimModel simModel = new SimModel();
+            SimController simController = new SimController(simViewParticles, simViewMenu, simModel);
 
-            Simulation sim = new Simulation(simState, simPanel, simMenu);
+            core.addLayer(simController);
 
-            simMenu.addChangeListener(sim);
-            simMenu.addActionListener(sim);
-            simMenu.addRadiusSliderListener(simPanel);
-
-            core.addLayer(sim);
-            core.addLayer(simPanel);
-
-            core.setMainPanel(simPanel);
-            core.addOverlayPanel(simMenu);
-
-            JFrame coreFrame = core.getFrame();
-
-            coreFrame.addComponentListener(simPanel);
+            core.setMainPanel(simController.getSimViewParticles());
+            core.addOverlayPanel(simController.getSimViewMenu());
+            core.listenFrameComponent(simController);
 
             core.run();
 
-            coreFrame.dispose();
+            System.exit(0);
         }
         catch (Exception e)
         {
             System.err.println(e.getMessage());
             System.exit(-1);
         }
-
-
     }
 }

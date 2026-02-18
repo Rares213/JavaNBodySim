@@ -1,3 +1,7 @@
+/**
+ * Naive implementation of gravity force finder
+ * Runs in N^2
+ */
 package physics;
 
 import java.util.ArrayList;
@@ -5,6 +9,10 @@ import static java.lang.Math.hypot;
 
 public class GravityDirect extends Gravity
 {
+    /**
+     * Initial data for algorithm
+     * @param gravityData data for gravity
+     */
     public GravityDirect(GravityData gravityData)
     {
         super(gravityData);

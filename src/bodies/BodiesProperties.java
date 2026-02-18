@@ -1,3 +1,8 @@
+/**
+ * Class that contains the properties a body has.
+ * A property is a parameter that describes something about the body.
+ */
+
 package bodies;
 
 import java.util.ArrayList;
@@ -5,6 +10,10 @@ import java.util.Collections;
 
 public class BodiesProperties
 {
+    /**
+     * Constructor for properties with initial size
+     * @param size number of bodies
+     */
     public BodiesProperties(int size)
     {
         this.size = size;
@@ -33,11 +42,6 @@ public class BodiesProperties
     void setSize(int size)
     {
         this.size = size;
-    }
-
-    void trimArrays()
-    {
-
     }
 
     public int getDimensions()

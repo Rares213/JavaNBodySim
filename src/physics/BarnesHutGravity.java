@@ -1,3 +1,8 @@
+/**
+ * Class that implements an efficient algorithm to find the gravitational force
+ * Runs in Nlog(N)
+ */
+
 package physics;
 
 import java.util.ArrayList;
@@ -16,6 +21,10 @@ public class BarnesHutGravity extends Gravity
     protected ExecutorService pool;
     ArrayList<WorkerData> workersData;
 
+    /**
+     * Initial data for the algorithm
+     * @param bhData
+     */
     public BarnesHutGravity(BarnesHutData bhData)
     {
         super(bhData.gravityData);
@@ -80,13 +89,25 @@ public class BarnesHutGravity extends Gravity
         duration = endTime - startTime;
     }
 
+    /**
+     * Class that contains the data needed for the algorithm
+     */
     static public class BarnesHutData
     {
         GravityData gravityData;
         float theta;
 
+        /**
+         * Constructor for BarnesHutData
+         * @param gravityData data for gravity
+         * @param theta parameter used for the accuracy of the algorithm. Lower = more accurate
+         * @throws IllegalArgumentException if gravity data is null or theta less than 0
+         */
         public BarnesHutData(GravityData gravityData, float theta)
         {
+            if(theta < 0.0f || gravityData == null)
+                throw new IllegalArgumentException("Invalid parameters");
+
             this.gravityData = gravityData;
             this.theta = theta;
         }

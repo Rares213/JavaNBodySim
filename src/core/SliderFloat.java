@@ -1,15 +1,18 @@
 package core;
 
-import javax.swing.*;
+import javax.swing.JSlider;
 
 public class SliderFloat extends JSlider
 {
-    private final float stepSize;
+    protected float stepSize;
 
     public SliderFloat(String name, float maxValue, float stepSize, float initialValue)
     {
-        if(maxValue < 0 || stepSize < 0 ||  initialValue < 0 || stepSize > 1.0)
+        if(maxValue < 0 || stepSize < 0 ||  initialValue < 0)
             throw new IllegalArgumentException("NO NEGATIVE VALUES");
+
+        if(!isStepsizeValid(stepSize))
+            throw new IllegalArgumentException("INVALID STEPSIZE");
 
         super(0, toIntRepresentation(maxValue, stepSize), toIntRepresentation(initialValue, stepSize));
         super.setName(name);
@@ -29,4 +32,21 @@ public class SliderFloat extends JSlider
     {
         return (float) value * stepSize;
     }
+
+    private static boolean isStepsizeValid(float stepsize)
+    {
+        final float[] validStepsize = { 0.1f, 0.01f, 0.001f, 0.0001f };
+
+        boolean isValid = false;
+        for(float step : validStepsize)
+            if (Float.compare(step, stepsize) == 0)
+            {
+                isValid = true;
+                break;
+            }
+
+        return isValid;
+    }
+
+
 }
